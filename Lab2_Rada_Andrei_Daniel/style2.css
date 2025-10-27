@@ -1,0 +1,89 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #e9edf2;
+    color: #333;
+    text-align: center;
+    margin: 100px;
+}
+
+h1 {
+    color: #2d4f73;
+    margin-top: 40px;
+}
+
+p {
+    margin-bottom: 30px;
+    color: #445a70;
+}
+
+form {
+    background-color: white;
+    width: 400px;
+    margin: 0 auto;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    text-align: left;
+}
+
+label {
+    display: block;
+    margin-top: 15px;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+input[type="text"],
+select,
+textarea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #b0bccb;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+input[type="text"]:focus,
+select:focus,
+textarea:focus {
+    border-color: #3a6ea5;
+    outline: none;
+}
+
+.radio-group,
+.checkbox-group {
+    margin-top: 5px;
+}
+
+.radio-group label,
+.checkbox-group label {
+    display: block;
+    font-weight: normal;
+}
+
+.butoane {
+    text-align: center;
+    margin-top: 20px;
+}
+
+button {
+    padding: 10px 20px;
+    margin: 5px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    color: white;
+}
+
+button[type="submit"] {
+    background-color: #3a6ea5;
+}
+
+button[type="reset"] {
+    background-color: #999;
+}
+
+button:hover {
+    opacity: 0.9;
+}

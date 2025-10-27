@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formular de înregistrare animale</title>
+    <link rel="stylesheet" href="style2.css">
+</head>
+<body>
+    <h1>Formular de înregistrare animale</h1>
+    <p>Completați datele de mai jos pentru a înregistra animalul dumneavoastră la clinica veterinară.</p>
+
+    <form>
+        <label for="numeStapan">Nume stăpân:</label>
+        <input type="text" id="numeStapan" name="numeStapan" required>
+
+        <label for="telefon">Telefon:</label>
+        <input type="text" id="telefon" name="telefon" required>
+
+        <label for="numeAnimal">Nume animal:</label>
+        <input type="text" id="numeAnimal" name="numeAnimal" required>
+
+        <label for="specie">Specie:</label>
+        <select id="specie" name="specie">
+            <option value="Caine">Câine</option>
+            <option value="Pisica">Pisică</option>
+            <option value="Iepure">Iepure</option>
+            <option value="Altul">Altul</option>
+        </select>
+
+        <label>Sexul animalului:</label>
+        <div class="radio-group">
+            <label><input type="radio" name="sex" value="Mascul"> Mascul</label>
+            <label><input type="radio" name="sex" value="Femela"> Femelă</label>
+        </div>
+
+        <label>Servicii dorite:</label>
+        <div class="checkbox-group">
+            <label><input type="checkbox" name="servicii" value="Vaccinare"> Vaccinare</label>
+            <label><input type="checkbox" name="servicii" value="Deparazitare"> Deparazitare</label>
+            <label><input type="checkbox" name="servicii" value="Consult"> Consult</label>
+        </div>
+
+        <label for="observatii">Observații:</label>
+        <textarea id="observatii" name="observatii" rows="4"></textarea>
+
+        <div class="butoane">
+            <button type="submit">Trimite</button>
+            <button type="reset">Resetează</button>
+        </div>
+    </form>
+</body>
+</html>
