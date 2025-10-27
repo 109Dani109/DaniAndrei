@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="ro">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Contul Meu - AutoLux</title>
+  <link rel="stylesheet" href="styleContulMeu.css">
+</head>
+<body>
+  <!-- Bara de navigație -->
+  <nav class="navbar">
+    <div class="logo">AutoLux</div>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">Despre</a></li>
+      <li><a href="catalog.html">Catalog</a></li>
+      <li><a href="locatii.html">Locații</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <button class="login-btn">Logout</button>
+  </nav>
+
+  <!-- Informații utilizator -->
+  <section class="user-section glass">
+    <h2>Bun venit, <span class="username">Andrei Popescu</span> 👋</h2>
+    <p>Email: <span class="email">andrei.popescu@email.com</span></p>
+  </section>
+
+  <!-- Programare vizionare -->
+  <section class="programare glass">
+    <h3>Programează o vizionare</h3>
+    <p>Selectează mașina dorită și stabilește data și ora.</p>
+    
+    <form class="form-programare">
+      <label for="car">Alege mașina:</label>
+      <select id="car" name="car" required>
+        <option value="">Selectează...</option>
+        <option value="dacia-spring">Dacia Spring</option>
+        <option value="electra-ev">Electra EV</option>
+        <option value="urban-suv">Urban SUV</option>
+        <option value="clasic-touring">Clasic Touring</option>
+      </select>
+
+      <div class="datetime">
+        <div>
+          <label for="date">Data vizionării:</label>
+          <input type="date" id="date" name="date" required>
+        </div>
+        <div>
+          <label for="time">Ora vizionării:</label>
+          <input type="time" id="time" name="time" required>
+        </div>
+      </div>
+
+      <label for="message">Mesaj opțional:</label>
+      <textarea id="message" name="message" rows="3" placeholder="Ex: Aș dori o prezentare detaliată despre interior."></textarea>
+
+      <button type="submit" class="submit-btn">Trimite cererea</button>
+    </form>
+  </section>
+</body>
+</html>

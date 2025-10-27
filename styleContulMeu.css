@@ -1,0 +1,187 @@
+/* ======= Reset & fundal ======= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: linear-gradient(135deg, #0a0f1f 0%, #1a2740 50%, #0d1324 100%);
+  color: #fff;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* ======= Bara de navigație ======= */
+.navbar {
+  width: 100%;
+  max-width: 1200px;
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px 30px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.45);
+}
+
+.logo {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #00e6e6;
+  text-shadow: 0 0 15px rgba(0, 230, 230, 0.6);
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 25px;
+}
+
+.nav-links a {
+  color: #e5e7eb;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+  color: #00e6e6;
+}
+
+.login-btn {
+  background: rgba(0, 230, 230, 0.15);
+  border: 1px solid rgba(0, 230, 230, 0.4);
+  color: #fff;
+  padding: 8px 18px;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(14px) saturate(180%);
+}
+
+.login-btn:hover {
+  background: rgba(0, 230, 230, 0.3);
+  border-color: rgba(0, 230, 230, 0.6);
+}
+
+/* ======= Secțiunea utilizator ======= */
+.user-section {
+  max-width: 800px;
+  margin-top: 60px;
+  text-align: center;
+  padding: 40px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(25px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.45);
+}
+
+.username {
+  color: #00e6e6;
+}
+
+/* ======= Secțiunea programare ======= */
+.programare {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 40px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(25px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.45);
+}
+
+.programare h3 {
+  color: #00e6e6;
+  margin-bottom: 10px;
+  font-size: 1.8rem;
+}
+
+.programare p {
+  color: #cbd5e1;
+  margin-bottom: 20px;
+}
+
+.form-programare {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+label {
+  font-weight: 500;
+}
+
+input,
+select,
+textarea {
+  background: rgba(255, 255, 255, 0.12);
+  border: none;
+  border-radius: 10px;
+  padding: 10px 14px;
+  color: #fff;
+  font-size: 1rem;
+  backdrop-filter: blur(10px);
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  outline: 2px solid #00e6e6;
+}
+
+/* Grup data + ora */
+.datetime {
+  display: flex;
+  gap: 20px;
+}
+
+.datetime div {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Buton trimite */
+.submit-btn {
+  background: rgba(0, 230, 230, 0.2);
+  border: 1px solid rgba(0, 230, 230, 0.5);
+  color: white;
+  font-weight: 600;
+  border-radius: 10px;
+  padding: 12px 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 10px;
+}
+
+.submit-btn:hover {
+  background: rgba(0, 230, 230, 0.35);
+  transform: scale(1.05);
+}
+
+/* ======= Responsive ======= */
+@media (max-width: 768px) {
+  .datetime {
+    flex-direction: column;
+  }
+
+  .nav-links {
+    display: none;
+  }
+
+  .programare, .user-section {
+    margin: 20px;
+  }
+}
