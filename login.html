@@ -1,26 +1,46 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ro">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Page</title>
-    <link rel="stylesheet" href="styleLogin.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Login - AutoLux</title>
+  <link rel="stylesheet" href="styleLogin.css">
+  <link rel="stylesheet" href="navBar.css">
 </head>
 <body>
-    <div class="login-container">
-        <h2>Autentificare</h2>
-        <form action="#" method="post">
-            <div class="input-group">
-                <label for="username">Nume utilizator</label>
-                <input type="text" id="username" name="username" placeholder="Introdu numele de utilizator" required>
-            </div>
-            <div class="input-group">
-                <label for="password">Parolă</label>
-                <input type="password" id="password" name="password" placeholder="Introdu parola" required>
-            </div>
-            <button type="submit">Login</button>
-            <p class="register-link">Nu ai cont? <a href="#">Înregistrează-te</a></p>
-        </form>
-    </div>
+
+  <!-- Bara de navigație -->
+  <nav class="navbar glass">
+    <a href="index.html" class="nav-logo">AutoLux</a>
+
+    <ul class="nav-links">
+   
+      <li><a href="about.html">Despre Noi</a></li>
+      <li><a href="catalog.html">Catalog</a></li>
+      <li><a href="locatii.html">Locații</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+
+
+  </nav>
+
+  <!-- Secțiunea login -->
+  <section class="login-container glass">
+    <h1>Autentificare</h1>
+    <p>Introduceți datele pentru a vă conecta la contul AutoLux</p>
+
+    <form class="login-form" action="#" method="post">
+      <label for="username">Nume utilizator</label>
+      <input type="text" id="username" name="username" placeholder="Introdu numele de utilizator" required>
+
+      <label for="password">Parolă</label>
+      <input type="password" id="password" name="password" placeholder="Introdu parola" required>
+
+      <button type="submit" class="send-btn">Conectează-te</button>
+
+      <p class="register-link">Nu ai cont? <a href="register.html">Înregistrează-te aici</a></p>
+    </form>
+  </section>
+
 </body>
 </html>

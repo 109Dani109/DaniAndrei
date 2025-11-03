@@ -5,22 +5,27 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Locațiile Noastre</title>
   <link rel="stylesheet" href="styleLocatii.css">
+  <link rel="stylesheet" href="navBar.css">
 </head>
 <body>
   <!-- Bara de navigație -->
-   <nav class="navbar">
-    <div class="logo">DnXPark</div>
+  <nav class="navbar glass">
+    <!-- Logo stânga -->
+    <a href="index.html" class="nav-logo">AutoLux</a>
+
+    <!-- Link-uri centru -->
     <ul class="nav-links">
-      <li><a href="index.php">Home</a></li>
-      <li><a href="about.html">About</a></li>
+      <li><a href="about.html">Despre Noi</a></li>
       <li><a href="catalog.html">Catalog</a></li>
-      <li><a href="locatii.html">Locații</a></li>
+      <li><a href="locatii.html" class="active">Locații</a></li>
       <li><a href="contact.html">Contact</a></li>
     </ul>
-    <button class="login-btn">Login</button>
+
+    <!-- Buton dreapta -->
+    <button class="login-btn"><a href="login.html">Log In</a></button>
   </nav>
 
-  <!-- Titlu și descriere -->
+  <!-- Header locații -->
   <header class="location-header">
     <h1>Locațiile AutoLux</h1>
     <p>Ne poți găsi în mai multe orașe din țară — vino să ne vizitezi și să descoperi mașina perfectă pentru tine.</p>
@@ -51,6 +56,33 @@
       <p>Calea Aradului nr. 89</p>
       <iframe 
         src="https://www.google.com/maps?q=Calea+Aradului+89+Timisoara&output=embed"
+        allowfullscreen="" loading="lazy">
+      </iframe>
+    </div>
+
+    <div class="location-card">
+      <h2>Iași</h2>
+      <p>Bulevardul Ștefan cel Mare nr. 22</p>
+      <iframe 
+        src="https://www.google.com/maps?q=Bulevardul+Stefan+cel+Mare+22+Iasi&output=embed"
+        allowfullscreen="" loading="lazy">
+      </iframe>
+    </div>
+
+    <div class="location-card">
+      <h2>Constanța</h2>
+      <p>Bulevardul Tomis nr. 100</p>
+      <iframe 
+        src="https://www.google.com/maps?q=Bulevardul+Tomis+100+Constanta&output=embed"
+        allowfullscreen="" loading="lazy">
+      </iframe>
+    </div>
+
+    <div class="location-card">
+      <h2>Brașov</h2>
+      <p>Strada Republicii nr. 33</p>
+      <iframe 
+        src="https://www.google.com/maps?q=Strada+Republicii+33+Brasov&output=embed"
         allowfullscreen="" loading="lazy">
       </iframe>
     </div>

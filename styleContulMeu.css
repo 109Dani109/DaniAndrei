@@ -1,8 +1,8 @@
-/* ======= Reset & fundal ======= */
+/* ======= Reset & bază ======= */
 * {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
 }
 
 body {
@@ -13,104 +13,47 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding: 20px;
 }
 
-/* ======= Bara de navigație ======= */
-.navbar {
+/* ======= Secțiuni glass ======= */
+.glass {
+  background: rgba(0,0,0,0.5);
+  border-radius: 20px;
+  padding: 30px;
+  margin: 25px 0;
+  max-width: 800px;
   width: 100%;
-  max-width: 1200px;
-  margin-top: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 15px 30px;
-  border-radius: 16px;
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(20px) saturate(180%);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(12px) saturate(180%);
+  border: 1px solid rgba(255,255,255,0.15);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
 }
 
-.logo {
-  font-size: 1.6rem;
-  font-weight: 700;
-  color: #00e6e6;
-  text-shadow: 0 0 15px rgba(0, 230, 230, 0.6);
-}
-
-.nav-links {
-  list-style: none;
-  display: flex;
-  gap: 25px;
-}
-
-.nav-links a {
-  color: #e5e7eb;
-  text-decoration: none;
-  font-weight: 500;
-  transition: color 0.2s;
-}
-
-.nav-links a:hover,
-.nav-links a.active {
-  color: #00e6e6;
-}
-
-.login-btn {
-  background: rgba(0, 230, 230, 0.15);
-  border: 1px solid rgba(0, 230, 230, 0.4);
-  color: #fff;
-  padding: 8px 18px;
-  border-radius: 10px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  backdrop-filter: blur(14px) saturate(180%);
-}
-
-.login-btn:hover {
-  background: rgba(0, 230, 230, 0.3);
-  border-color: rgba(0, 230, 230, 0.6);
-}
-
-/* ======= Secțiunea utilizator ======= */
-.user-section {
-  max-width: 800px;
-  margin-top: 60px;
-  text-align: center;
-  padding: 40px;
-  border-radius: 20px;
-  background: rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(25px) saturate(180%);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.45);
-}
-
-.username {
-  color: #00e6e6;
-}
-
-/* ======= Secțiunea programare ======= */
-.programare {
-  max-width: 800px;
-  margin: 40px auto;
-  padding: 40px;
-  border-radius: 20px;
-  background: rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(25px) saturate(180%);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.45);
-}
-
-.programare h3 {
+/* ======= Info utilizator ======= */
+.user-section h2 {
+  font-size: 2rem;
   color: #00e6e6;
   margin-bottom: 10px;
-  font-size: 1.8rem;
+}
+.user-section p {
+  font-size: 1.1rem;
+  color: #cbd5e1;
+}
+.username, .email {
+  font-weight: 600;
+  color: #ff6b6b;
 }
 
+/* ======= Formular programare ======= */
+.programare h3 {
+  font-size: 1.7rem;
+  color: #00e6e6;
+  margin-bottom: 10px;
+}
 .programare p {
+  margin-bottom: 15px;
   color: #cbd5e1;
-  margin-bottom: 20px;
+  font-size: 1rem;
 }
 
 .form-programare {
@@ -119,56 +62,54 @@ body {
   gap: 15px;
 }
 
-label {
+.form-programare label {
   font-weight: 500;
 }
 
-input,
-select,
-textarea {
-  background: rgba(255, 255, 255, 0.12);
-  border: none;
+.form-programare select,
+.form-programare input[type="date"],
+.form-programare input[type="time"],
+.form-programare textarea {
+  padding: 10px;
   border-radius: 10px;
-  padding: 10px 14px;
+  border: 1px solid rgba(255,255,255,0.2);
+  background: rgba(255,255,255,0.05);
   color: #fff;
   font-size: 1rem;
-  backdrop-filter: blur(10px);
 }
 
-input:focus,
-select:focus,
-textarea:focus {
-  outline: 2px solid #00e6e6;
+.form-programare select:focus,
+.form-programare input:focus,
+.form-programare textarea:focus {
+  outline: none;
+  border-color: #00e6e6;
 }
 
-/* Grup data + ora */
 .datetime {
   display: flex;
   gap: 20px;
+  flex-wrap: wrap;
 }
 
 .datetime div {
   flex: 1;
-  display: flex;
-  flex-direction: column;
+  min-width: 140px;
 }
 
-/* Buton trimite */
+/* ======= Buton ======= */
 .submit-btn {
-  background: rgba(0, 230, 230, 0.2);
-  border: 1px solid rgba(0, 230, 230, 0.5);
-  color: white;
-  font-weight: 600;
-  border-radius: 10px;
   padding: 12px 20px;
+  background: #ff4d4d;
+  color: #fff;
+  font-weight: 700;
+  border: none;
+  border-radius: 12px;
   cursor: pointer;
   transition: all 0.3s ease;
-  margin-top: 10px;
 }
 
 .submit-btn:hover {
-  background: rgba(0, 230, 230, 0.35);
-  transform: scale(1.05);
+  background: #ff7878;
 }
 
 /* ======= Responsive ======= */
@@ -176,12 +117,7 @@ textarea:focus {
   .datetime {
     flex-direction: column;
   }
-
-  .nav-links {
-    display: none;
-  }
-
-  .programare, .user-section {
-    margin: 20px;
+  .user-section h2, .programare h3 {
+    font-size: 1.5rem;
   }
 }

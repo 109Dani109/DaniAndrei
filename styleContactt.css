@@ -1,14 +1,10 @@
-/* ======= Reset & Bază ======= */
-* {
-  box-sizing: border-box;
+/* Reset general */
+body {
   margin: 0;
   padding: 0;
-}
-
-body {
-  font-family: 'Inter', sans-serif;
-  background: linear-gradient(135deg, #0a0f1f 0%, #1a2740 50%, #0d1324 100%);
-  color: #fff;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: url('ImaginiCatalog/background.webp') no-repeat center center/cover;
+  color: white;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -16,154 +12,100 @@ body {
   padding: 0 20px 40px;
 }
 
-/* ======= Bara de navigație ======= */
-.navbar {
-  width: 100%;
-  max-width: 1200px;
-  margin-top: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 15px 30px;
-  border-radius: 16px;
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(20px) saturate(180%);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.45);
-}
-
-.logo {
-  font-size: 1.6rem;
-  font-weight: 700;
-  color: #00e6e6;
-  text-shadow: 0 0 15px rgba(0, 230, 230, 0.6);
-}
-
-.nav-links {
-  list-style: none;
-  display: flex;
-  gap: 25px;
-}
-
-.nav-links a {
-  color: #e5e7eb;
-  text-decoration: none;
-  font-weight: 500;
-  position: relative;
-  transition: color 0.2s;
-}
-
-.nav-links a:hover,
-.nav-links a.active {
-  color: #00e6e6;
-}
-
-.login-btn {
-  background: rgba(0, 230, 230, 0.15);
-  border: 1px solid rgba(0, 230, 230, 0.4);
-  color: #fff;
-  padding: 8px 18px;
-  border-radius: 10px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  backdrop-filter: blur(14px) saturate(180%);
-}
-
-.login-btn:hover {
-  background: rgba(0, 230, 230, 0.3);
-  border-color: rgba(0, 230, 230, 0.6);
-}
-
-/* ======= Secțiune Contact ======= */
-.contact-container {
-  margin-top: 60px;
-  max-width: 600px;
-  width: 100%;
-  background: rgba(255, 255, 255, 0.12);
-  backdrop-filter: blur(25px) saturate(180%);
-  -webkit-backdrop-filter: blur(25px) saturate(180%);
-  padding: 40px 30px;
+/* Glass effect pentru secțiune */
+.glass {
+  background: rgba(0,0,0,0.6);
+  backdrop-filter: blur(10px);
   border-radius: 20px;
-  border: 1px solid rgba(255, 255, 255, 0.25);
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
-  text-align: center;
+  padding: 30px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
 }
 
+/* Contact container - mai îngust */
+.contact-container {
+  max-width: 600px; /* lățime mai mică */
+  width: 90%;       /* ocupă 90% din container pe ecranele mici */
+  text-align: center;
+  margin-top: 50px;
+}
+
+/* Titlu și paragraf */
 .contact-container h1 {
-  color: #00e6e6;
-  margin-bottom: 10px;
-  text-shadow: 0 0 10px rgba(0, 230, 230, 0.5);
+  font-size: 3rem;
+  margin-bottom: 15px;
+  color: #ff4d4d;
 }
 
 .contact-container p {
-  color: #d1d5db;
+  font-size: 1.2rem;
   margin-bottom: 30px;
+  color: #ffffffcc;
 }
 
+/* Formular modern */
 .contact-form {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 15px;
+  width: 100%; /* formularul ocupă lățimea containerului */
 }
 
 .contact-form label {
   text-align: left;
-  color: #cbd5e1;
-  font-weight: 500;
+  font-weight: bold;
   margin-bottom: 5px;
 }
 
 .contact-form input,
 .contact-form textarea {
-  width: 100%;
   padding: 12px 15px;
-  border: none;
-  border-radius: 10px;
-  background: rgba(255, 255, 255, 0.15);
-  color: #fff;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.3);
+  background: rgba(255,255,255,0.05);
+  color: white;
   font-size: 1rem;
-  backdrop-filter: blur(10px);
-  outline: none;
-  transition: background 0.3s ease, border 0.3s ease;
+  width: 100%;
+  resize: none;
 }
 
 .contact-form input:focus,
 .contact-form textarea:focus {
-  background: rgba(0, 230, 230, 0.1);
-  border: 1px solid rgba(0, 230, 230, 0.5);
+  outline: none;
+  border-color: #ff4d4d;
+  box-shadow: 0 0 10px rgba(255,77,77,0.5);
 }
 
+/* Buton Trimite Mesaj */
 .send-btn {
-  background: rgba(0, 230, 230, 0.2);
-  color: #fff;
-  border: 1px solid rgba(0, 230, 230, 0.5);
-  border-radius: 10px;
-  padding: 12px;
-  font-size: 1rem;
-  font-weight: 600;
+  padding: 14px 28px;
+  border-radius: 12px;
+  border: none;
+  background-color: #ff4d4d;
+  color: white;
+  font-weight: bold;
   cursor: pointer;
-  transition: all 0.3s ease;
-  text-transform: uppercase;
-  backdrop-filter: blur(12px);
+  font-size: 1.1rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .send-btn:hover {
-  background: rgba(0, 230, 230, 0.4);
-  box-shadow: 0 0 15px rgba(0, 230, 230, 0.6);
+  transform: scale(1.05);
+  box-shadow: 0 5px 20px rgba(255,77,77,0.6);
 }
 
-/* ======= Responsive ======= */
-@media (max-width: 600px) {
+/* Responsive */
+@media (max-width: 768px) {
   .contact-container {
-    padding: 30px 20px;
+    max-width: 90%; /* mai îngust pe mobil */
+    margin-top: 30px;
+    padding: 20px;
   }
 
-  .navbar {
-    padding: 12px 20px;
+  .contact-container h1 {
+    font-size: 2rem;
   }
 
-  .nav-links {
-    display: none;
+  .contact-container p {
+    font-size: 1rem;
   }
 }

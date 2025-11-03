@@ -3,59 +3,87 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Catalog Mașini</title>
+  <title>Catalog Mașini - AutoLux</title>
   <link rel="stylesheet" href="styleCatalog.css">
+  <link rel="stylesheet" href="navBar.css">
 </head>
 <body>
 
   <!-- Bara de navigație -->
-  <nav class="navbar">
-    <div class="logo">DnXPark</div>
+  <nav class="navbar glass">
+    <!-- Logo -->
+    <a href="index.html" class="nav-logo">AutoLux</a>
+
+    <!-- Link-uri centru -->
     <ul class="nav-links">
-      <li><a href="index.php">Home</a></li>
-      <li><a href="about.html">About</a></li>
-      <li><a href="catalog.html">Catalog</a></li>
+
+      <li><a href="about.html">Despre Noi</a></li>
+      <li><a href="catalog.html" class="active">Catalog</a></li>
       <li><a href="locatii.html">Locații</a></li>
       <li><a href="contact.html">Contact</a></li>
     </ul>
-    <button class="login-btn">Login</button>
+
+    <!-- Buton dreapta -->
+    <button class="login-btn"><a href="login.html">Log In</a></button>
   </nav>
 
-  <header>
+  <!-- Header Catalog -->
+  <header class="catalog-header glass">
     <h1>Catalog Mașini</h1>
-    <p>Galerie de mașini responsive</p>
+    <p>Explorează selecția noastră premium de automobile de lux, garantat funcționale și la cele mai bune prețuri de pe piață.</p>
   </header>
 
-  
-
+  <!-- Secțiunea cardurilor -->
   <section class="container">
     <div class="card">
-      <img src="ImaginiCatalog/daciaSpring.jpg" alt="Mașină sport roșie">
+      <img src="ImaginiCatalog/daciaSpring.jpg" alt="Dacia Logan">
       <h3>Dacia Logan</h3>
       <p class="price">€5,900</p>
-      <p>Un coupe sportiv cu performanță puternică și interior premium.</p>
+      <p>Mașină compactă, funcțională și accesibilă, perfectă pentru oraș.</p>
     </div>
 
     <div class="card">
-      <img src="images/car2.jpg" alt="SUV gri">
+      <img src="images/car2.jpg" alt="Urban SUV">
       <h3>Urban SUV</h3>
       <p class="price">€28,450</p>
-      <p>Spațios, eficient la consum și excelent pentru familie.</p>
+      <p>Spațios, elegant și fiabil, ideal pentru familii și călătorii.</p>
     </div>
 
     <div class="card">
-      <img src="images/car3.jpg" alt="Mașină electrică albastră">
+      <img src="images/car3.jpg" alt="Electra EV">
       <h3>Electra EV</h3>
       <p class="price">€42,000</p>
-      <p>Autonomie mare, încărcare rapidă și design modern.</p>
+      <p>Electric, cu autonomie mare și design modern, pentru un stil de viață premium.</p>
     </div>
 
     <div class="card">
-      <img src="images/car4.jpg" alt="Mașină clasică albastră">
+      <img src="images/car4.jpg" alt="Clasic Touring">
       <h3>Clasic Touring</h3>
       <p class="price">€19,750</p>
-      <p>Confortabilă și ideală pentru naveta zilnică.</p>
+      <p>Clasic și elegant, confortabil pentru naveta zilnică sau drumuri lungi.</p>
     </div>
   </section>
+
+<button id="scrollTopBtn" title="Mergi sus">↑</button>
+
+<script>
+const scrollBtn = document.getElementById('scrollTopBtn');
+
+// Afișează butonul când scroll > 200px
+window.onscroll = function() {
+  if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+    scrollBtn.classList.add('show');
+  } else {
+    scrollBtn.classList.remove('show');
+  }
+};
+
+// Scroll la început când se apasă butonul
+scrollBtn.addEventListener('click', () => {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+</script>
+
+
 </body>
 </html>

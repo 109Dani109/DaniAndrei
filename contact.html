@@ -5,27 +5,32 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Contact</title>
   <link rel="stylesheet" href="styleContactt.css">
+  <link rel="stylesheet" href="navBar.css">
 </head>
 <body>
   <!-- Bara de navigație -->
-   <nav class="navbar">
-    <div class="logo">DnXPark</div>
+  <nav class="navbar glass">
+    <!-- Logo stânga -->
+    <a href="index.html" class="nav-logo">AutoLux</a>
+
+    <!-- Link-uri centru -->
     <ul class="nav-links">
-      <li><a href="index.php">Home</a></li>
-      <li><a href="about.html">About</a></li>
+      <li><a href="about.html">Despre Noi</a></li>
       <li><a href="catalog.html">Catalog</a></li>
-      <li><a href="locatii.html">Locații</a></li>
-      <li><a href="contact.html">Contact</a></li>
+      <li><a href="locatii.html" >Locații</a></li>
+      <li><a href="contact.html" class="active">Contact</a></li>
     </ul>
-    <button class="login-btn">Login</button>
+
+    <!-- Buton dreapta -->
+    <button class="login-btn"><a href="login.html">Log In</a></button>
   </nav>
 
   <!-- Secțiunea de contact -->
-  <section class="contact-container">
+  <section class="contact-container glass">
     <h1>Contactează-ne</h1>
-    <p>Completează formularul de mai jos și te vom contacta in cel mai scurt timp</p>
+    <p>Completează formularul de mai jos și te vom contacta în cel mai scurt timp.</p>
 
-    <form class="contact-form" action="#" method="post">
+    <form class="contact-form" action="sendMail.php" method="post">
       <label for="nume">Nume</label>
       <input type="text" id="nume" name="nume" placeholder="Introdu numele tău" required>
 
@@ -38,5 +43,29 @@
       <button type="submit" class="send-btn">Trimite Mesaj</button>
     </form>
   </section>
+
+
+  <script>
+document.querySelector(".contact-form").addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    let formData = new FormData(this);
+
+    fetch("sendMail.php", {
+        method: "POST",
+        body: formData
+    })
+    .then(res => res.text())
+    .then(resp => {
+        if (resp.includes("success")) {
+            alert("✅ Mesaj trimis cu succes!");
+            this.reset();
+        } else {
+            alert("❌ Eroare la trimitere: " + resp);
+        }
+    });
+});
+</script>
+
 </body>
 </html>

@@ -1,0 +1,169 @@
+/* Bara de navigație cu sticlă neagră */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 30px;
+  margin: 20px auto;
+  background: rgba(0, 0, 0, 0.6); /* sticlă neagră */
+  border-radius: 12px;
+  backdrop-filter: blur(15px) saturate(180%);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+  width: 90%;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Logo stânga cu sticlă neagră */
+.nav-logo {
+  font-size: 1.9rem;
+  font-weight: bold;
+  color: white;
+  text-decoration: none;
+  background-color: rgba(0,0,0,0.7);
+  padding: 10px 25px;
+  border-radius: 15px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.6);
+  text-align: center;
+  flex-shrink: 0;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.nav-logo:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 15px rgba(255,77,77,0.7);
+}
+
+/* Link-uri centru */
+.nav-links {
+  display: flex;
+  list-style: none;
+  gap: 25px;
+  padding: 0;
+  margin: 0 auto;
+}
+
+.nav-links li a {
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+  position: relative;
+  transition: color 0.3s ease;
+}
+
+.nav-links li a::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: -3px;
+  width: 0;
+  height: 3px;
+  background-color: #ff4d4d;
+  transition: width 0.3s ease, left 0.3s ease;
+}
+
+.nav-links li a:hover::after,
+.nav-links li a.active::after {
+  width: 100%;
+  left: 0;
+}
+
+/* Buton dreapta roșu, mai mare */
+.login-btn {
+  padding: 10px 22px; /* mai mare */
+  border: none;
+  border-radius: 12px;
+  background-color: #ff4d4d; /* roșu */
+  color: white;
+  font-weight: bold;
+  font-size: 1.05rem; /* puțin mai mare */
+  cursor: pointer;
+  flex-shrink: 0;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+}
+
+.login-btn a {
+  color: white; /* link alb în interior */
+  text-decoration: none;
+}
+
+.login-btn:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 15px rgba(255,77,77,0.7);
+}
+
+.login-btn::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: 0;
+  height: 3px;
+  background-color: #ff4d4d;
+  transition: width 0.3s ease, left 0.3s ease;
+}
+
+.login-btn:hover::after {
+  width: 100%;
+  left: 0;
+}
+
+#scrollTopBtn {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  z-index: 100;
+  background-color: #ff4d4d; /* roșu intens */
+  color: white;
+  border: none;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%; /* rotund */
+  font-size: 24px;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.4);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+  opacity: 0; /* ascuns inițial */
+}
+
+/* Efect hover */
+#scrollTopBtn:hover {
+  transform: scale(1.3); /* devine mai mare */
+  box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+  background-color: #ff1a1a; /* roșu mai aprins */
+}
+
+/* Afișează butonul când scroll > 200px */
+#scrollTopBtn.show {
+  opacity: 1;
+}
+
+
+
+/* Responsive pentru mobil */
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    padding: 8px 15px;
+    gap: 10px;
+  }
+
+  .nav-links {
+    flex-direction: column;
+    width: 100%;
+    gap: 10px;
+    margin: 0;
+    align-items: center;
+  }
+
+  .login-btn {
+    width: 80%;
+    text-align: center;
+  }
+
+  .nav-logo {
+    margin-bottom: 5px;
+  }
+}
