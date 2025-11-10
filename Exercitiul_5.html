@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <title>Exercitiul 5</title>
+</head>
+<body>
+    <script>
+      
+        let x = 10;
+        let y = 10;
+        let z = 10;
+
+  
+        if (x + y > z && x + z > y && y + z > x) {
+            
+            if (x === y && y === z) {
+                console.log("Triunghi echilateral");
+            } else if (x === y || x === z || y === z) {
+                console.log("Triunghi isoscel");
+            } else {
+                console.log("Triunghi oarecare");
+            }
+        } else {
+            console.log("Cele 3 numere NU pot forma un triunghi!");
+        }
+         
+    </script>
+</body>
+</html>
