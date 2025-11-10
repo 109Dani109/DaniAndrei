@@ -82,6 +82,30 @@ window.onscroll = function() {
 scrollBtn.addEventListener('click', () => {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 });
+
+
+async function fetchCars() {
+  try {
+    const res = await fetch('/api/cars.php');
+    const cars = await res.json();
+    const container = document.getElementById('cars-container');
+    container.innerHTML = cars.map(car => `
+      <div class="card">
+        <img src="${car.image_url}" alt="${car.make} ${car.model}">
+        <h3>${car.make} ${car.model}</h3>
+        <p class="price">€${Number(car.price).toLocaleString()}</p>
+        <p>${car.description}</p>
+      </div>
+    `).join('');
+  } catch (err) {
+    console.error(err);
+  }
+}
+fetchCars();
+
+
+
+
 </script>
 
 
