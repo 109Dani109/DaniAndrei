@@ -1,0 +1,42 @@
+version: '3.8'
+
+services:
+  apache:
+    image: php:8.1-apache
+    container_name: lamp_apache
+    volumes:
+      - ./studenti:/var/www/html
+    ports:
+      - "8080:80"
+    depends_on:
+      - mysql
+      - node
+
+  mysql:
+    image: mysql:5.7
+    container_name: lamp_mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: studenti
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+    ports:
+      - "3307:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+
+  node:
+    image: node:18
+    container_name: node_server
+    working_dir: /app
+    volumes:
+      - ./server:/app   # folder cu server.js și db.js
+    ports:
+      - "3000:3000"
+    command: node server.js
+    depends_on:
+      - mysql
+
+volumes:
+  db_data:
