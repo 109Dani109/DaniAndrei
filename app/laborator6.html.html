@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8" />
+  <title>Studenți</title>
+</head>
+<body>
+  <h2>Lista studenților</h2>
+
+  <form id="studentForm">
+    <input id="nume" type="text" placeholder="Nume" required />
+    <select id="an">
+      <option value="1">An 1</option>
+      <option value="2">An 2</option>
+      <option value="3">An 3</option>
+      <option value="4">An 4</option>
+    </select>
+    <input id="media" type="number" min="0" max="10" step="0.01" placeholder="Media" required />
+    <button type="submit">Adaugă</button>
+  </form>
+
+  <p id="msg"></p>
+
+  <ul id="lista"></ul>
+
+  <script>
+    const API = "api.php";
+    const lista = document.getElementById("lista");
+    const msg = document.getElementById("msg");
+
+    async function loadStudents() {
+      const res = await fetch(API);
+      const data = await res.json();
+
+      lista.innerHTML = data.map(s =>
+        `<li>${s.nume} – an ${s.an} – media ${Number(s.media).toFixed(2)}</li>`
+      ).join("");
+    }
+
+    document.getElementById("studentForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const payload = {
+        nume: document.getElementById("nume").value.trim(),
+        an: Number(document.getElementById("an").value),
+        media: Number(document.getElementById("media").value)
+      };
+
+      const res = await fetch(API, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+      });
+
+      const out = await res.json();
+      if (!res.ok) {
+        msg.textContent = out.error || "Eroare";
+        return;
+      }
+
+      document.getElementById("nume").value = "";
+      document.getElementById("media").value = "";
+
+      await loadStudents();
+      msg.textContent = "Student adăugat ✅";
+    });
+
+    loadStudents();
+  </script>
+</body>
+</html>
