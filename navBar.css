@@ -140,6 +140,28 @@
   opacity: 1;
 }
 
+/* ===== Username badge ===== */
+.user-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 14px;
+  margin-right: 10px; /* distanta fata de Logout */
+  border-radius: 14px;
+  background: #000;
+  color: #fff;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+}
+.user-badge {
+  background: #000 !important;
+  color: #fff !important;
+  border: 1px solid rgba(255,255,255,.18);
+  text-decoration: none;
+}
+.user-badge:hover {
+  background: #000 !important;
+}
 
 
 /* Responsive pentru mobil */

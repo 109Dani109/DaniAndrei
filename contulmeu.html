@@ -17,7 +17,13 @@
       <li><a href="locatii.html">Locații</a></li>
       <li><a href="contact.html">Contact</a></li>
     </ul>
-    <button class="login-btn">Logout</button>
+   <button class="login-btn" id="authBtn">
+    <a id="authLink" href="login.html">Login</a>
+  </button>
+
+  <button class="login-btn" id="logoutBtn" style="display:none;">
+    <a id="logoutLink" href="#">Logout</a>
+  </button>
   </nav>
 
   <!-- Informații utilizator -->
@@ -58,5 +64,9 @@
       <button type="submit" class="submit-btn">Trimite cererea</button>
     </form>
   </section>
+
+
+  <script src="navAuth.js"></script>
+
 </body>
 </html>

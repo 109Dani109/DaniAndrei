@@ -9,20 +9,28 @@
 </head>
 <body>
 <nav class="navbar glass">
-    <!-- Logo stânga -->
-    <a href="index.html" class="nav-logo">AutoLux</a>
+  <!-- Logo stânga -->
+  <a href="index.html" class="nav-logo">AutoLux</a>
 
-    <!-- Link-uri centru -->
-    <ul class="nav-links">
-      <li class="active"><a  href="about.html" class="active">Despre Noi</a></li>
-      <li ><a href="catalog.html">Catalog</a></li>
-      <li><a href="locatii.html">Locații</a></li>
-      <li><a href="contact.html">Contact</a></li>
-    </ul>
+  <!-- Link-uri centru -->
+  <ul class="nav-links">
+    <li><a href="about.html">Despre Noi</a></li>
+    <li><a href="catalog.html">Catalog</a></li>
+    <li><a href="locatii.html">Locații</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
 
-    <!-- Buton dreapta -->
-    <button class="login-btn"><a href="login.html">Log In</a></button>
-  </nav>
+  <!-- AUTH dreapta de tot (în afara UL) -->
+ <button class="login-btn" id="authBtn">
+    <a id="authLink" href="login.html">Login</a>
+  </button>
+
+  <button class="login-btn" id="logoutBtn" style="display:none;">
+    <a id="logoutLink" href="#">Logout</a>
+  </button>
+
+</nav>
+
   <h1>Despre AutoLux</h1>
   <!-- Secțiunea principală About -->
   <section class="about-container glass">
@@ -53,5 +61,9 @@
       <img src="ImaginiCatalog/aboutUs.webp" alt="Showroom AutoLux">
     </div>
   </section>
+
+
+  <script src="navAuth.js"></script>
+
 </body>
 </html>

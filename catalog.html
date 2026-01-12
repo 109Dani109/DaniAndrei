@@ -3,111 +3,285 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Catalog Mașini - AutoLux</title>
-  <link rel="stylesheet" href="styleCatalog.css">
-  <link rel="stylesheet" href="navBar.css">
+  <title>Catalog Masini - AutoLux</title>
+
+  <!-- cache-bust -->
+<link rel="stylesheet" href="styleCatalog.css?v=1003">
+
+  <link rel="stylesheet" href="navBar.css?v=1002">
 </head>
 <body>
 
-  <!-- Bara de navigație -->
-  <nav class="navbar glass">
-    <!-- Logo -->
-    <a href="index.html" class="nav-logo">AutoLux</a>
+<nav class="navbar glass">
+  <a href="index.html" class="nav-logo">AutoLux</a>
 
-    <!-- Link-uri centru -->
-    <ul class="nav-links">
+  <ul class="nav-links">
+    <li><a href="about.html">Despre Noi</a></li>
+    <li><a href="catalog.html">Catalog</a></li>
+    <li><a href="locatii.html">Locatii</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
 
-      <li><a href="about.html">Despre Noi</a></li>
-      <li><a href="catalog.html" class="active">Catalog</a></li>
-      <li><a href="locatii.html">Locații</a></li>
-      <li><a href="contact.html">Contact</a></li>
-    </ul>
+<button class="login-btn" id="authBtn">
+    <a id="authLink" href="login.html">Login</a>
+  </button>
 
-    <!-- Buton dreapta -->
-    <button class="login-btn"><a href="login.html">Log In</a></button>
-  </nav>
+  <button class="login-btn" id="logoutBtn" style="display:none;">
+    <a id="logoutLink" href="#">Logout</a>
+  </button>
+</nav>
 
-  <!-- Header Catalog -->
-  <header class="catalog-header glass">
-    <h1>Catalog Mașini</h1>
-    <p>Explorează selecția noastră premium de automobile de lux, garantat funcționale și la cele mai bune prețuri de pe piață.</p>
-  </header>
+<header class="catalog-header glass">
+  <h1>Catalog Masini</h1>
+  <p>Exploreaza selectia noastra premium de automobile, noi si second-hand.</p>
+</header>
 
-  <!-- Secțiunea cardurilor -->
-  <section class="container">
-    <div class="card">
-      <img src="ImaginiCatalog/daciaSpring.jpg" alt="Dacia Logan">
-      <h3>Dacia Logan</h3>
-      <p class="price">€5,900</p>
-      <p>Mașină compactă, funcțională și accesibilă, perfectă pentru oraș.</p>
+<section class="container" id="cars-container"></section>
+
+<!-- OVERLAY -->
+<div id="bookingOverlay" class="booking-overlay" aria-hidden="true">
+  <div class="booking-panel" role="dialog" aria-modal="true" aria-label="Programare test drive">
+    <div class="booking-head">
+      <div>
+        <h2>Programeaza test drive</h2>
+        <p id="bookingCarTitle" class="booking-subtitle"></p>
+      </div>
+      <button class="booking-x" id="bookingCloseX" type="button" aria-label="Inchide">✕</button>
     </div>
 
-    <div class="card">
-      <img src="images/car2.jpg" alt="Urban SUV">
-      <h3>Urban SUV</h3>
-      <p class="price">€28,450</p>
-      <p>Spațios, elegant și fiabil, ideal pentru familii și călătorii.</p>
+    <p id="bookingLoading" class="booking-msg" style="display:none;">Se verifica sesiunea...</p>
+
+    <!-- DACA NU E LOGAT -->
+    <div id="authBox" style="display:none; margin-top:14px;">
+      <p class="booking-msg" style="min-height:auto;">
+        Trebuie mai intai sa iti faci cont sau sa te loghezi ca sa te poti programa.
+      </p>
+
+      <div class="booking-actions">
+        <a class="booking-btn booking-primary" href="login.html">Login</a>
+        <a class="booking-btn booking-ghost" href="register.html">Creeaza cont</a>
+      </div>
     </div>
 
-    <div class="card">
-      <img src="images/car3.jpg" alt="Electra EV">
-      <h3>Electra EV</h3>
-      <p class="price">€42,000</p>
-      <p>Electric, cu autonomie mare și design modern, pentru un stil de viață premium.</p>
-    </div>
+    <!-- DACA E LOGAT -->
+    <div id="bookingBox" style="display:none;">
+      <div class="booking-grid">
+        <div class="booking-field">
+          <label for="bookingDate">Data</label>
+          <input type="date" id="bookingDate">
+        </div>
 
-    <div class="card">
-      <img src="images/car4.jpg" alt="Clasic Touring">
-      <h3>Clasic Touring</h3>
-      <p class="price">€19,750</p>
-      <p>Clasic și elegant, confortabil pentru naveta zilnică sau drumuri lungi.</p>
+        <div class="booking-field">
+          <label for="bookingTime">Ora</label>
+          <input type="time" id="bookingTime" step="1800">
+        </div>
+      </div>
+
+      <p id="bookingMsg" class="booking-msg"></p>
+
+      <div class="booking-actions">
+        <button class="booking-btn booking-primary" id="bookingSubmitBtn" type="button">Confirma</button>
+        <button class="booking-btn booking-ghost" id="bookingCloseBtn" type="button">Renunta</button>
+      </div>
     </div>
-  </section>
+  </div>
+</div>
 
 <button id="scrollTopBtn" title="Mergi sus">↑</button>
 
 <script>
+/* ===== Scroll Top ===== */
 const scrollBtn = document.getElementById('scrollTopBtn');
+window.addEventListener("scroll", () => {
+  if (document.documentElement.scrollTop > 200) scrollBtn.classList.add('show');
+  else scrollBtn.classList.remove('show');
+});
+scrollBtn.addEventListener("click", () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
-// Afișează butonul când scroll > 200px
-window.onscroll = function() {
-  if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
-    scrollBtn.classList.add('show');
-  } else {
-    scrollBtn.classList.remove('show');
-  }
-};
+/* ===== Overlay + anti-layout-shift ===== */
+const overlay = document.getElementById("bookingOverlay");
+const bookingCarTitle = document.getElementById("bookingCarTitle");
+const bookingLoading = document.getElementById("bookingLoading");
 
-// Scroll la început când se apasă butonul
-scrollBtn.addEventListener('click', () => {
-  window.scrollTo({ top: 0, behavior: 'smooth' });
+const authBox = document.getElementById("authBox");
+const bookingBox = document.getElementById("bookingBox");
+
+const bookingDate = document.getElementById("bookingDate");
+const bookingTime = document.getElementById("bookingTime");
+const bookingMsg = document.getElementById("bookingMsg");
+
+let selectedCarId = null;
+
+function lockScrollNoShift() {
+  const scrollBarWidth = window.innerWidth - document.documentElement.clientWidth;
+  document.body.style.paddingRight = scrollBarWidth > 0 ? scrollBarWidth + "px" : "0px";
+  document.body.classList.add("modal-open");
+}
+function unlockScrollNoShift() {
+  document.body.classList.remove("modal-open");
+  document.body.style.paddingRight = "0px";
+}
+
+function showOverlay() {
+  overlay.style.display = "flex";
+  overlay.setAttribute("aria-hidden", "false");
+  lockScrollNoShift();
+  requestAnimationFrame(() => overlay.classList.add("is-open"));
+}
+function hideOverlay() {
+  overlay.classList.remove("is-open");
+  overlay.setAttribute("aria-hidden", "true");
+  unlockScrollNoShift();
+  selectedCarId = null;
+  setTimeout(() => overlay.style.display = "none", 200);
+}
+
+document.getElementById("bookingCloseX").addEventListener("click", hideOverlay);
+document.getElementById("bookingCloseBtn").addEventListener("click", hideOverlay);
+overlay.addEventListener("click", (e) => { if (e.target === overlay) hideOverlay(); });
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape" && overlay.classList.contains("is-open")) hideOverlay();
 });
 
+function clearBookingMsg() {
+  bookingMsg.textContent = "";
+  bookingMsg.classList.remove("ok");
+}
+bookingDate.addEventListener("input", clearBookingMsg);
+bookingTime.addEventListener("input", clearBookingMsg);
+bookingDate.addEventListener("keydown", (e) => { if (e.key === "Enter") e.preventDefault(); });
+bookingTime.addEventListener("keydown", (e) => { if (e.key === "Enter") e.preventDefault(); });
 
-async function fetchCars() {
+function fetchWithTimeout(url, opts = {}, ms = 4000) {
+  const controller = new AbortController();
+  const id = setTimeout(() => controller.abort(), ms);
+  return fetch(url, { ...opts, signal: controller.signal }).finally(() => clearTimeout(id));
+}
+
+/* ===== openBooking ===== */
+async function openBooking(carId, carName) {
+  selectedCarId = carId;
+  bookingCarTitle.textContent = "Masina selectata: " + carName;
+
+  authBox.style.display = "none";
+  bookingBox.style.display = "none";
+  bookingLoading.style.display = "block";
+
+  bookingDate.value = "";
+  bookingTime.value = "";
+  clearBookingMsg();
+
+  showOverlay();
+
   try {
-    const res = await fetch('/api/cars.php');
-    const cars = await res.json();
-    const container = document.getElementById('cars-container');
-    container.innerHTML = cars.map(car => `
-      <div class="card">
-        <img src="${car.image_url}" alt="${car.make} ${car.model}">
-        <h3>${car.make} ${car.model}</h3>
-        <p class="price">€${Number(car.price).toLocaleString()}</p>
-        <p>${car.description}</p>
-      </div>
-    `).join('');
+    const res = await fetchWithTimeout("/api/me.php", { credentials: "include" }, 4000);
+    bookingLoading.style.display = "none";
+
+    if (!res.ok) {
+      authBox.style.display = "block";
+      bookingBox.style.display = "none";
+      return;
+    }
+
+    authBox.style.display = "none";
+    bookingBox.style.display = "block";
+    bookingDate.focus();
+
   } catch (err) {
-    console.error(err);
+    bookingLoading.style.display = "none";
+    authBox.style.display = "block";
+    bookingBox.style.display = "none";
   }
 }
+
+/* ===== submit booking (DEBUG) ===== */
+document.getElementById("bookingSubmitBtn").addEventListener("click", async () => {
+  const date = bookingDate.value;
+  const time = bookingTime.value;
+
+  clearBookingMsg();
+
+  if (!selectedCarId) { bookingMsg.textContent = "Eroare: masina neselectata."; return; }
+  if (!date || !time) { bookingMsg.textContent = "Selecteaza data si ora!"; return; }
+
+  try {
+    const res = await fetch("/api/appointments.php", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      credentials: "include",
+      body: JSON.stringify({ car_id: selectedCarId, date, time })
+    });
+
+    const text = await res.text();
+    let data = {};
+    try { data = JSON.parse(text); } catch(e) {}
+
+    console.log("appointments.php status:", res.status);
+    console.log("appointments.php body:", text);
+
+    if (res.status === 401) {
+      authBox.style.display = "block";
+      bookingBox.style.display = "none";
+      bookingMsg.textContent = data.message || "Trebuie sa fii logat.";
+      return;
+    }
+
+    if (res.ok && data.ok) {
+      bookingMsg.textContent = data.message || "Programare realizata cu succes!";
+      bookingMsg.classList.add("ok");
+      setTimeout(() => window.location.href = "contulmeu.php", 700);
+    } else {
+      bookingMsg.textContent = (data && data.message)
+        ? data.message
+        : ("Eroare (status " + res.status + "). Verifica Console.");
+    }
+
+  } catch (err) {
+    console.error(err);
+    bookingMsg.textContent = "Eroare de retea.";
+  }
+});
+
+/* ===== specs ===== */
+function buildSpecs(car) {
+  const specs = [];
+  if (car.year) specs.push(`An: ${car.year}`);
+  if (car.mileage_km != null) specs.push(`Km: ${Number(car.mileage_km).toLocaleString()}`);
+  if (car.fuel) specs.push(`Combustibil: ${car.fuel}`);
+  if (car.transmission) specs.push(`Cutie: ${car.transmission}`);
+  if (car.power_hp) specs.push(`Putere: ${car.power_hp} HP`);
+  if (car.color) specs.push(`Culoare: ${car.color}`);
+  return `<div class="car-specs">${specs.map(s => `<span class="spec-item">${s}</span>`).join("")}</div>`;
+}
+
+/* ===== load cars ===== */
+async function fetchCars() {
+  const res = await fetch("/api/cars.php");
+  const cars = await res.json();
+  const container = document.getElementById("cars-container");
+
+  container.innerHTML = cars.map(car => {
+    const carName = `${car.make} ${car.model}`;
+    const safeName = carName.replace(/'/g, "\\'");
+    return `
+      <div class="card">
+        <img src="${car.image_url}" alt="${carName}">
+        <h3>${carName}</h3>
+        <p class="price">€${Number(car.price).toLocaleString()}</p>
+        <p>${car.description || ""}</p>
+
+        <button class="book-btn" type="button" onclick="openBooking(${car.id}, '${safeName}')">
+          Programeaza-te
+        </button>
+
+        ${buildSpecs(car)}
+      </div>
+    `;
+  }).join("");
+}
 fetchCars();
-
-
-
-
 </script>
 
-
+<script src="navAuth.js"></script>
 </body>
 </html>

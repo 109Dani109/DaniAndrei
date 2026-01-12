@@ -1,9 +1,4 @@
-/* ======= Reset & Bază ======= */
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
+* { box-sizing: border-box; margin: 0; padding: 0; }
 
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -16,7 +11,10 @@ body {
   align-items: center;
 }
 
-/* ======= Header Catalog ======= */
+/* IMPORTANT: nu mai sare layout-ul (paddingRight e setat din JS) */
+body.modal-open { overflow: hidden; }
+
+/* Header */
 .catalog-header {
   text-align: center;
   margin: 40px 0 30px;
@@ -35,12 +33,9 @@ body {
   text-shadow: 0 0 10px rgba(255, 77, 77, 0.7);
 }
 
-.catalog-header p {
-  font-size: 1.2rem;
-  color: #e2e8f0;
-}
+.catalog-header p { font-size: 1.2rem; color: #e2e8f0; }
 
-/* ======= Carduri ======= */
+/* Cards */
 .container {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
@@ -55,7 +50,7 @@ body {
   border-radius: 20px;
   overflow: hidden;
   text-align: center;
-  padding-bottom: 15px;
+  padding-bottom: 18px;
   transition: transform 0.35s ease, box-shadow 0.35s ease, background 0.4s ease;
   backdrop-filter: blur(15px);
   border: 1px solid rgba(255,255,255,0.2);
@@ -76,15 +71,17 @@ body {
 }
 
 .card h3 {
-  margin: 15px 0 5px;
+  margin: 16px 0 6px;
   color: #ff4d4d;
-  font-size: 1.4rem;
+  font-size: 1.8rem;
+  font-weight: 900;
 }
 
 .price {
   color: #ff9a76;
-  font-weight: 700;
+  font-weight: 800;
   margin-bottom: 10px;
+  font-size: 1.15rem;
 }
 
 .card p {
@@ -94,27 +91,269 @@ body {
   line-height: 1.5;
 }
 
-/* ======= Responsive ======= */
-@media (max-width: 900px) {
-  .container {
-    grid-template-columns: repeat(2, 1fr);
-  }
+/* Main button */
+.book-btn {
+  width: calc(100% - 30px);
+  margin: 12px 15px 0;
+  padding: 16px 16px;
+  border-radius: 18px;
+  border: 1px solid rgba(255,255,255,0.18);
+  background: rgba(255,77,77,0.95);
+  color: #fff;
+  font-weight: 900;
+  letter-spacing: 0.3px;
+  cursor: pointer;
+  box-shadow: 0 14px 28px rgba(0,0,0,0.55);
+  transition: transform .18s ease, box-shadow .18s ease, background .18s ease, filter .18s ease;
 }
 
+.book-btn:hover {
+  background: rgba(0,0,0,0.92);
+  transform: translateY(-2px);
+  box-shadow: 0 18px 42px rgba(0,0,0,0.7);
+  filter: brightness(1.05);
+}
+
+.book-btn:active { transform: translateY(0); }
+
+/* Specs chips */
+.car-specs{
+  margin: 14px 15px 0;
+  padding: 14px;
+  border-radius: 18px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.12);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+}
+
+.spec-item{
+  font-size: 0.95rem;
+  color: rgba(226,232,240,0.95);
+  padding: 10px 14px;
+  border-radius: 999px;
+  background: rgba(0,0,0,0.38);
+  border: 1px solid rgba(255,255,255,0.10);
+  white-space: nowrap;
+}
+
+/* Overlay */
+.booking-overlay{
+  display:none;
+  position: fixed;
+  inset: 0;
+  z-index: 999999;
+  align-items: center;
+  justify-content: center;
+  padding: 18px;
+
+  background: rgba(0,0,0,0.55);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+
+  opacity: 0;
+  transition: opacity .2s ease;
+
+  /* IMPORTANT: blocheaza click pe fundal */
+  pointer-events: none;
+}
+
+.booking-overlay.is-open{
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.booking-panel{
+  width: min(640px, 95vw);
+  border-radius: 22px;
+  padding: 18px 18px 16px;
+
+  background: rgba(10,10,15,0.88);
+  border: 1px solid rgba(255,255,255,0.16);
+  box-shadow: 0 24px 80px rgba(0,0,0,0.78);
+
+  transform: translateY(-22px);
+  opacity: 0;
+  transition: transform .22s ease, opacity .22s ease;
+}
+
+.booking-overlay.is-open .booking-panel{
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.booking-head{
+  display:flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items:flex-start;
+}
+
+.booking-head h2{
+  margin: 0;
+  color: #ff4d4d;
+  font-size: 1.7rem;
+  font-weight: 900;
+  text-shadow: 0 0 14px rgba(255,77,77,0.45);
+}
+
+.booking-subtitle{
+  margin-top: 6px;
+  color: rgba(226,232,240,0.92);
+  font-weight: 700;
+}
+
+.booking-x{
+  width: 42px;
+  height: 42px;
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(255,255,255,0.06);
+  color: rgba(226,232,240,0.95);
+  cursor: pointer;
+  transition: transform .18s ease, background .18s ease;
+}
+.booking-x:hover{
+  transform: translateY(-1px);
+  background: rgba(255,255,255,0.10);
+}
+
+.booking-grid{
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.booking-field label{
+  display:block;
+  margin-bottom: 8px;
+  font-weight: 900;
+  color: rgba(226,232,240,0.9);
+}
+
+.booking-field input{
+  width: 100%;
+  padding: 12px 12px;
+  border-radius: 16px;
+  border: 1px solid rgba(255,255,255,0.16);
+  background: rgba(255,255,255,0.08);
+  color: #fff;
+  outline: none;
+  transition: box-shadow .2s ease, border-color .2s ease;
+}
+.booking-field input:focus{
+  border-color: rgba(255,77,77,0.75);
+  box-shadow: 0 0 0 4px rgba(255,77,77,0.18);
+}
+
+.booking-msg{
+  margin-top: 12px;
+  min-height: 22px;
+  font-weight: 900;
+  color: #ff9a76;
+}
+.booking-msg.ok{ color: #22c55e; }
+
+.booking-actions{
+  display:flex;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.booking-btn{
+  flex: 1;
+  padding: 12px 14px;
+  border-radius: 16px;
+  border: 1px solid rgba(255,255,255,0.14);
+  cursor: pointer;
+  font-weight: 900;
+  letter-spacing: 0.25px;
+  text-decoration: none;
+  text-align: center;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  transition: transform .18s ease, box-shadow .18s ease, background .18s ease;
+}
+
+/* rosu -> hover negru */
+.booking-primary{
+  background: rgba(255,77,77,0.95);
+  color: #fff;
+  box-shadow: 0 14px 28px rgba(0,0,0,0.45);
+}
+.booking-primary:hover{
+  background: rgba(0,0,0,0.92);
+  transform: translateY(-2px);
+  box-shadow: 0 18px 42px rgba(0,0,0,0.60);
+}
+
+.booking-ghost{
+  background: rgba(255,255,255,0.06);
+  color: rgba(226,232,240,0.95);
+}
+.booking-ghost:hover{
+  background: rgba(0,0,0,0.92);
+  transform: translateY(-2px);
+}
+
+/* Scroll top */
+#scrollTopBtn {
+  position: fixed;
+  right: 18px;
+  bottom: 18px;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.2);
+  background: rgba(255,77,77,0.95);
+  color: #fff;
+  cursor: pointer;
+  display: none;
+  font-size: 22px;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.55);
+  transition: transform 0.25s ease, background 0.25s ease;
+  z-index: 9998;
+}
+#scrollTopBtn:hover { transform: translateY(-3px); background: rgba(0,0,0,0.92); }
+#scrollTopBtn.show { display: block; }
+
+/* ===== 4 masini pe rand ===== */
+#cars-container {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 18px;
+  align-items: stretch;
+}
+
+/* cardul sa ocupe corect in grid */
+#cars-container .card {
+  width: 100%;
+}
+
+/* responsive */
+@media (max-width: 1200px) {
+  #cars-container { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+
+@media (max-width: 900px) {
+  #cars-container { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 560px) {
+  #cars-container { grid-template-columns: 1fr; }
+}
+
+
+@media (max-width: 900px) { .container { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 700px) { .booking-grid { grid-template-columns: 1fr; } }
 @media (max-width: 600px) {
-  .container {
-    grid-template-columns: 1fr;
-  }
-  .catalog-header h1 {
-    font-size: 2rem;
-  }
-  .card img {
-    height: 180px;
-  }
-  .nav-links {
-    display: none;
-  }
-  .navbar {
-    padding: 12px 20px;
-  }
+  .container { grid-template-columns: 1fr; }
+  .catalog-header h1 { font-size: 2rem; }
+  .card img { height: 180px; }
+  .nav-links { display: none; }
+  .navbar { padding: 12px 20px; }
 }

@@ -9,21 +9,28 @@
 </head>
 <body>
   <!-- Bara de navigație -->
-  <nav class="navbar glass">
-    <!-- Logo stânga -->
-    <a href="index.html" class="nav-logo">AutoLux</a>
+<nav class="navbar glass">
+  <!-- Logo stânga -->
+  <a href="index.html" class="nav-logo">AutoLux</a>
 
-    <!-- Link-uri centru -->
-    <ul class="nav-links">
-      <li><a href="about.html">Despre Noi</a></li>
-      <li><a href="catalog.html">Catalog</a></li>
-      <li><a href="locatii.html">Locații</a></li>
-      <li><a href="contact.html">Contact</a></li>
-    </ul>
+  <!-- Link-uri centru -->
+  <ul class="nav-links">
+    <li><a href="about.html">Despre Noi</a></li>
+    <li><a href="catalog.html">Catalog</a></li>
+    <li><a href="locatii.html">Locații</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
 
-    <!-- Buton dreapta -->
-    <button class="login-btn">Login</button>
-  </nav>
+  <!-- AUTH dreapta de tot (în afara UL) -->
+ <button class="login-btn" id="authBtn">
+    <a id="authLink" href="login.html">Login</a>
+  </button>
+
+  <button class="login-btn" id="logoutBtn" style="display:none;">
+    <a id="logoutLink" href="#">Logout</a>
+  </button>
+</nav>
+
 
   <!-- Secțiune de prezentare -->
   <section class="hero">
@@ -34,6 +41,7 @@
     </div>
   </section>
 
- 
+ <script src="navAuth.js"></script>
+
 </body>
 </html>

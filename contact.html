@@ -9,21 +9,29 @@
 </head>
 <body>
   <!-- Bara de navigație -->
-  <nav class="navbar glass">
-    <!-- Logo stânga -->
-    <a href="index.html" class="nav-logo">AutoLux</a>
+ <nav class="navbar glass">
+  <!-- Logo stânga -->
+  <a href="index.html" class="nav-logo">AutoLux</a>
 
-    <!-- Link-uri centru -->
-    <ul class="nav-links">
-      <li><a href="about.html">Despre Noi</a></li>
-      <li><a href="catalog.html">Catalog</a></li>
-      <li><a href="locatii.html" >Locații</a></li>
-      <li><a href="contact.html" class="active">Contact</a></li>
-    </ul>
+  <!-- Link-uri centru -->
+  <ul class="nav-links">
+    <li><a href="about.html">Despre Noi</a></li>
+    <li><a href="catalog.html">Catalog</a></li>
+    <li><a href="locatii.html">Locații</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
 
-    <!-- Buton dreapta -->
-    <button class="login-btn"><a href="login.html">Log In</a></button>
-  </nav>
+  <!-- AUTH dreapta de tot (în afara UL) -->
+  
+ <button class="login-btn" id="authBtn">
+    <a id="authLink" href="login.html">Login</a>
+  </button>
+
+  <button class="login-btn" id="logoutBtn" style="display:none;">
+    <a id="logoutLink" href="#">Logout</a>
+  </button>
+</nav>
+
 
   <!-- Secțiunea de contact -->
   <section class="contact-container glass">
@@ -66,6 +74,7 @@ document.querySelector(".contact-form").addEventListener("submit", function(e) {
     });
 });
 </script>
+<script src="navAuth.js"></script>
 
 </body>
 </html>

@@ -2,39 +2,14 @@
 <html lang="ro">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Login - AutoLux</title>
-  <link rel="stylesheet" href="styleLogin.css">
-  <link rel="stylesheet" href="navBar.css">
+  <title>Redirect...</title>
+  <meta http-equiv="refresh" content="0; url=login.php">
 </head>
 <body>
-  <nav class="navbar glass">
-    <a href="index.html" class="nav-logo">AutoLux</a>
-    <ul class="nav-links">
-      <li><a href="about.html">Despre Noi</a></li>
-      <li><a href="catalog.html">Catalog</a></li>
-      <li><a href="locatii.html">Locații</a></li>
-      <li><a href="contact.html">Contact</a></li>
-    </ul>
-  </nav>
+  <script>
+    window.location.replace("login.php");
+  </script>
 
-  <section class="login-container glass">
-    <h1>Autentificare</h1>
-    <p>Introduceți datele pentru a vă conecta la contul AutoLux</p>
-
-    <form class="login-form">
-      <label for="username">Nume utilizator</label>
-      <input type="text" id="username" name="username" placeholder="Introdu numele de utilizator" required>
-
-      <label for="password">Parolă</label>
-      <input type="password" id="password" name="password" placeholder="Introdu parola" required>
-
-      <button type="submit" class="send-btn">Conectează-te</button>
-
-      <p class="register-link">Nu ai cont? <a href="register.html">Înregistrează-te aici</a></p>
-    </form>
-  </section>
-
-  <script src="loginScript.js"></script>
+  <p>Redirecționare către login...</p>
 </body>
 </html>
