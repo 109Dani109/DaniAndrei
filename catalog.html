@@ -6,9 +6,34 @@
   <title>Catalog Masini - AutoLux</title>
 
   <!-- cache-bust -->
-<link rel="stylesheet" href="styleCatalog.css?v=1003">
-
+  <link rel="stylesheet" href="styleCatalog.css?v=1003">
   <link rel="stylesheet" href="navBar.css?v=1002">
+
+  <!-- doar pentru butonul de admin (minim, fara sa stricam tema) -->
+  <style>
+    .admin-actions {
+      display: none;              /* devine flex doar pt admin */
+      justify-content: center;
+      margin: 14px auto 6px;
+      padding: 0 14px;
+    }
+    .admin-add-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 12px 18px;
+      border-radius: 14px;
+      font-weight: 900;
+      text-decoration: none;
+      background: #d11a2a;
+      color: #fff;
+      border: 1px solid rgba(255,255,255,.18);
+      box-shadow: 0 10px 22px rgba(0,0,0,.18);
+      transition: transform .08s ease, opacity .2s ease;
+    }
+    .admin-add-btn:hover { transform: translateY(-1px); opacity: .95; }
+  </style>
 </head>
 <body>
 
@@ -22,7 +47,7 @@
     <li><a href="contact.html">Contact</a></li>
   </ul>
 
-<button class="login-btn" id="authBtn">
+  <button class="login-btn" id="authBtn">
     <a id="authLink" href="login.html">Login</a>
   </button>
 
@@ -35,6 +60,12 @@
   <h1>Catalog Masini</h1>
   <p>Exploreaza selectia noastra premium de automobile, noi si second-hand.</p>
 </header>
+
+<!-- ✅ BUTON ADMIN: apare doar daca role=admin -->
+<div class="admin-actions" id="adminActions">
+  <!-- schimba aici destinatia daca pagina ta e creare_anunt.php -->
+  <a class="admin-add-btn" id="adminAddBtn" href="adauga-anunt.html">+ Adaugă anunț</a>
+</div>
 
 <section class="container" id="cars-container"></section>
 
@@ -194,7 +225,7 @@ async function openBooking(carId, carName) {
   }
 }
 
-/* ===== submit booking (DEBUG) ===== */
+/* ===== submit booking ===== */
 document.getElementById("bookingSubmitBtn").addEventListener("click", async () => {
   const date = bookingDate.value;
   const time = bookingTime.value;
@@ -203,6 +234,13 @@ document.getElementById("bookingSubmitBtn").addEventListener("click", async () =
 
   if (!selectedCarId) { bookingMsg.textContent = "Eroare: masina neselectata."; return; }
   if (!date || !time) { bookingMsg.textContent = "Selecteaza data si ora!"; return; }
+
+  // siguranta UI (backend valideaza oricum)
+  const mm = parseInt((time.split(":")[1] || "0"), 10);
+  if (mm !== 0 && mm !== 30) {
+    bookingMsg.textContent = "Ora trebuie sa fie din 30 in 30 (ex: 10:00, 10:30).";
+    return;
+  }
 
   try {
     const res = await fetch("/api/appointments.php", {
@@ -264,7 +302,7 @@ async function fetchCars() {
     const carName = `${car.make} ${car.model}`;
     const safeName = carName.replace(/'/g, "\\'");
     return `
-      <div class="card">
+      <div class="card" data-car-id="${car.id}">
         <img src="${car.image_url}" alt="${carName}">
         <h3>${carName}</h3>
         <p class="price">€${Number(car.price).toLocaleString()}</p>
@@ -280,6 +318,82 @@ async function fetchCars() {
   }).join("");
 }
 fetchCars();
+
+/* ===========================
+   ADMIN detection + UI
+   =========================== */
+let IS_ADMIN = false;
+
+(async function detectAdminAndToggleUI(){
+  try {
+    const res = await fetch("/api/me.php", { credentials: "include" });
+    if (!res.ok) return;
+
+    const me = await res.json();
+    const role = (me.user && me.user.role ? me.user.role : "").toString().toLowerCase();
+    IS_ADMIN = (role === "admin");
+
+    // arata butonul de adaugare anunt
+    const adminActions = document.getElementById("adminActions");
+    if (IS_ADMIN) adminActions.style.display = "flex";
+
+  } catch(e) {
+    // daca pica /api/me.php, nu afisam nimic
+  }
+})();
+
+/* ===========================
+   ADMIN: triple-click delete
+   =========================== */
+const carsContainer = document.getElementById("cars-container");
+const clickState = new Map(); // carId -> {count, t}
+
+carsContainer.addEventListener("click", async (e) => {
+  if (!IS_ADMIN) return;
+
+  // nu sterge daca dai click pe buton
+  if (e.target.closest("button")) return;
+
+  const card = e.target.closest(".card[data-car-id]");
+  if (!card) return;
+
+  const carId = parseInt(card.getAttribute("data-car-id"), 10);
+  if (!carId) return;
+
+  const now = Date.now();
+  const prev = clickState.get(carId) || { count: 0, t: 0 };
+
+  // 3 click-uri rapide (max 600ms intre click-uri)
+  const within = (now - prev.t) < 600;
+  const count = within ? (prev.count + 1) : 1;
+
+  clickState.set(carId, { count, t: now });
+
+  if (count < 3) return;
+  clickState.delete(carId);
+
+  const carTitle = card.querySelector("h3")?.textContent?.trim() || ("ID " + carId);
+  const ok = confirm(`Ștergi mașina "${carTitle}"?\nAcțiune definitivă.`);
+  if (!ok) return;
+
+  try {
+    const res = await fetch("/api/cars_delete.php", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      credentials: "include",
+      body: JSON.stringify({ car_id: carId })
+    });
+
+    const data = await res.json().catch(() => ({}));
+    if (!res.ok || !data.ok) throw new Error(data.message || ("Eroare (status " + res.status + ")"));
+
+    // scoate cardul din UI
+    card.remove();
+
+  } catch(err) {
+    alert("Nu s-a putut șterge: " + (err.message || err));
+  }
+});
 </script>
 
 <script src="navAuth.js"></script>

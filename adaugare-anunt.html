@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="ro">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Adaugă anunț - AutoLux</title>
+
+  <!-- foloseste aceleasi CSS ca site-ul tau -->
+  <link rel="stylesheet" href="styleCatalog.css?v=1003">
+  <link rel="stylesheet" href="navBar.css?v=1002">
+
+  <style>
+    .page-wrap{ max-width: 980px; margin: 0 auto; padding: 18px 14px 30px; }
+    .panel{ padding: 18px; border-radius: 16px; box-shadow: 0 10px 24px rgba(0,0,0,.14); }
+    .panel h1{ margin: 0 0 8px; }
+    .hint{ opacity:.85; margin-bottom: 16px; }
+
+    .grid{ display:grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 12px; }
+    .field{ display:flex; flex-direction:column; gap: 6px; }
+    .field label{ font-weight: 700; }
+    .field input, .field select, .field textarea{
+      padding: 10px 12px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,.20);
+      background: rgba(0,0,0,.18);
+      color: #fff;
+      outline: none;
+    }
+    .field textarea{ min-height: 120px; resize: vertical; }
+    .full{ grid-column: 1 / -1; }
+
+    .actions{ display:flex; gap: 10px; justify-content:flex-end; margin-top: 14px; flex-wrap: wrap; }
+    .btn{
+      border: none; cursor:pointer; font-weight: 800;
+      padding: 12px 18px; border-radius: 12px;
+    }
+    .btn-red{ background:#d11a2a; color:#fff; }
+    .btn-ghost{ background: rgba(255,255,255,.10); color:#fff; border:1px solid rgba(255,255,255,.18); }
+
+    .preview{ display:flex; gap: 12px; align-items:flex-start; margin-top: 8px; }
+    .preview img{
+      width: 220px; height: 150px; object-fit: cover;
+      border-radius: 14px; border:1px solid rgba(255,255,255,.18);
+      display:none;
+    }
+
+    .msg{ margin-top: 10px; font-weight: 700; }
+    .msg.ok{ color:#7CFFB2; }
+    .msg.err{ color:#FF8B8B; }
+
+    @media (max-width: 720px){
+      .grid{ grid-template-columns: 1fr; }
+      .actions{ justify-content: stretch; }
+      .btn{ width: 100%; }
+      .preview img{ width: 100%; height: 190px; }
+    }
+  </style>
+</head>
+
+<body>
+
+<nav class="navbar glass">
+  <a href="index.html" class="nav-logo">AutoLux</a>
+  <ul class="nav-links">
+    <li><a href="about.html">Despre Noi</a></li>
+    <li><a href="catalog.html">Catalog</a></li>
+    <li><a href="locatii.html">Locatii</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+
+  <button class="login-btn" id="authBtn">
+    <a id="authLink" href="login.html">Login</a>
+  </button>
+  <button class="login-btn" id="logoutBtn" style="display:none;">
+    <a id="logoutLink" href="#">Logout</a>
+  </button>
+</nav>
+
+<header class="catalog-header glass">
+  <h1>Adaugă anunț</h1>
+  <p>Disponibil doar pentru admin.</p>
+</header>
+
+<main class="page-wrap">
+  <section class="panel glass">
+    <h1>Detalii mașină</h1>
+    <div class="hint">Completează câmpurile și apasă „Salvează”. După salvare te întorci în Catalog.</div>
+
+    <form id="addForm">
+      <div class="grid">
+
+        <div class="field">
+          <label for="make">Marcă (make)*</label>
+          <input id="make" name="make" required placeholder="Ex: BMW">
+        </div>
+
+        <div class="field">
+          <label for="model">Model*</label>
+          <input id="model" name="model" required placeholder="Ex: Seria 3">
+        </div>
+
+        <div class="field">
+          <label for="year">An</label>
+          <input id="year" name="year" type="number" min="1950" max="2100" placeholder="Ex: 2018">
+        </div>
+
+        <div class="field">
+          <label for="price">Preț (EUR)*</label>
+          <input id="price" name="price" type="number" min="0" step="1" required placeholder="Ex: 14900">
+        </div>
+
+        <div class="field">
+          <label for="mileage_km">Kilometraj (km)</label>
+          <input id="mileage_km" name="mileage_km" type="number" min="0" step="1" placeholder="Ex: 185000">
+        </div>
+
+        <div class="field">
+          <label for="fuel">Combustibil</label>
+          <select id="fuel" name="fuel">
+            <option value="">-</option>
+            <option value="Benzină">Benzină</option>
+            <option value="Diesel">Diesel</option>
+            <option value="Hibrid">Hibrid</option>
+            <option value="Electric">Electric</option>
+            <option value="GPL">GPL</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="transmission">Cutie</label>
+          <select id="transmission" name="transmission">
+            <option value="">-</option>
+            <option value="Manuală">Manuală</option>
+            <option value="Automată">Automată</option>
+            <option value="Semiautomată">Semiautomată</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="power_hp">Putere (HP)</label>
+          <input id="power_hp" name="power_hp" type="number" min="0" step="1" placeholder="Ex: 184">
+        </div>
+
+        <div class="field">
+          <label for="color">Culoare</label>
+          <input id="color" name="color" placeholder="Ex: Negru">
+        </div>
+
+        <div class="field full">
+          <label for="description">Descriere*</label>
+          <textarea id="description" name="description" required placeholder="Descrierea care apare pe card..."></textarea>
+        </div>
+
+        <div class="field full">
+          <label for="image">Poză*</label>
+          <input id="image" name="image" type="file" accept="image/*" required>
+          <div class="preview">
+            <img id="imgPreview" alt="Preview imagine">
+            <div style="opacity:.85;">Se acceptă JPG/PNG/WEBP.</div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="actions">
+        <button type="button" class="btn btn-ghost" onclick="location.href='catalog.html'">Înapoi</button>
+        <button type="submit" class="btn btn-red">Salvează</button>
+      </div>
+
+      <div id="msg" class="msg"></div>
+    </form>
+  </section>
+</main>
+
+<script src="navAuth.js"></script>
+
+<script>
+  function setMsg(text, type){
+    const el = document.getElementById("msg");
+    el.classList.remove("ok","err");
+    if (type) el.classList.add(type);
+    el.textContent = text || "";
+  }
+
+  // protectie: doar admin
+  async function requireAdmin() {
+    try {
+      const res = await fetch("/api/me.php", { credentials: "include" });
+      if (!res.ok) throw new Error("not logged");
+
+      const text = await res.text();
+      let me = {};
+      try { me = JSON.parse(text); } catch(e) {}
+
+      const role = (me.role || me.user_role || (me.user && me.user.role) || "").toString().toLowerCase();
+      if (role !== "admin") throw new Error("not admin");
+    } catch(e) {
+      alert("Acces interzis. Doar admin.");
+      location.href = "catalog.html";
+    }
+  }
+  requireAdmin();
+
+  // preview imagine
+  const imageInput = document.getElementById("image");
+  const imgPreview = document.getElementById("imgPreview");
+  imageInput.addEventListener("change", () => {
+    const f = imageInput.files && imageInput.files[0];
+    if (!f) { imgPreview.style.display = "none"; return; }
+    imgPreview.src = URL.createObjectURL(f);
+    imgPreview.style.display = "block";
+  });
+
+  // submit
+  document.getElementById("addForm").addEventListener("submit", async (e) => {
+    e.preventDefault();
+    setMsg("Se salvează...", "");
+
+    const fd = new FormData(e.target);
+
+    try {
+      const res = await fetch("/api/cars_create.php", {
+        method: "POST",
+        credentials: "include",
+        body: fd
+      });
+
+      const text = await res.text();
+      let data = {};
+      try { data = JSON.parse(text); } catch(e) {}
+
+      if (!res.ok || !data.ok) {
+        throw new Error((data && data.message) ? data.message : ("Eroare (status " + res.status + ")"));
+      }
+
+      setMsg("Anunț salvat! Te redirecționez în catalog...", "ok");
+      setTimeout(() => location.href = "catalog.html", 700);
+
+    } catch (err) {
+      setMsg("Eroare la salvare: " + (err.message || err), "err");
+    }
+  });
+</script>
+
+</body>
+</html>
